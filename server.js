@@ -9,7 +9,6 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const carRoutes = require("./routes/carRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-const reviewsRoutes = require('./routes/reviewRoutes');
 const app = express();
 
 app.use(express.json());
@@ -20,7 +19,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/cars", carRoutes);
 app.use("/api/orders", orderRoutes);
-app.use('/api/reviews', reviewsRoutes);
 
 app.get('/api/currency', async (req, res) => {
     try {
