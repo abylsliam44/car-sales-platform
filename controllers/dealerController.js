@@ -1,5 +1,4 @@
 const Dealer = require("../models/Dealer");
-
 const getDealers = async (req, res) => {
   try {
     const dealers = await Dealer.find().populate("addedBy");
