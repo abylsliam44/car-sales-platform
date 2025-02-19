@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Sales Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">Car Sales</h1>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cars.html">Cars</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <h1>Welcome to Car Sales Platform</h1>
+        <p>Find the best deals on cars and make your purchase hassle-free!</p>
+        <button onclick="location.href='register.html'">Register</button>
+        <button onclick="location.href='login.html'">Login</button>
+    </header>
+
+    <section class="image-showcase">
+        <img src="imageS/s_1.jpg" alt="Showcase Car" />
+    </section>
+    
+
+    <section class="features">
+        <h2>Why Choose Us?</h2>
+        <div class="feature-cards">
+            <div class="feature-card">
+                <h3>🚀 Fast & Secure</h3>
+                <p>Quick transactions with secure payments.</p>
+            </div>
+            <div class="feature-card">
+                <h3>💰 Best Prices</h3>
+                <p>We offer unbeatable prices and discounts.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📞 24/7 Support</h3>
+                <p>Our support team is available round the clock.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="countdown">
+        <h2>⏳ Special Car Sale Ends In:</h2>
+        <div id="timer"></div>
+    </section>
+
+    <section class="currency-rates">
+        <h2>Current Exchange Rates</h2>
+        <div id="currency-container">
+            <p>Loading currency data...</p>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <p>"Great service! Bought my dream car here. Highly recommend!"</p>
+                <strong>- Azan Orunbek</strong>
+            </div>
+            <div class="testimonial">
+                <p>"The prices are unbeatable, and the support team is amazing."</p>
+                <strong>- Aibolat Urzhin</strong>
+            </div>
+            <div class="testimonial">
+                <p>"Smooth and secure transactions. Will buy again!"</p>
+                <strong>- Rustem Aligozhin</strong>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Car Sales Platform</p>
+        </div>
+    </footer>
+    
+    <script>
+        function startCountdown() {
+            const saleEnd = new Date().getTime() + (5 * 24 * 60 * 60 * 1000); // 5 дней
+            const timer = document.getElementById('timer');
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = saleEnd - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                timer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                if (distance < 0) {
+                    timer.innerHTML = "Sale Ended!";
+                }
+            }
+
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+        }
+
+        async function loadCurrencyRates() {
+            try {
+                const res = await fetch('/api/currency');
+                const data = await res.json();
+
+                if (!res.ok) throw new Error('Failed to load currency data');
+
+                const { USD, EUR, RUB, KZT } = data;
+                const container = document.getElementById('currency-container');
+
+                container.innerHTML = `
+                    <div class="currency-card">
+                        <h3>USD to KZT:</h3>
+                        <p>1 USD = ${(KZT / USD).toFixed(2)} KZT</p>
+                    </div>
+                    <div class="currency-card">
+                        <h3>EUR to KZT:</h3>
+                        <p>1 EUR = ${(KZT / EUR).toFixed(2)} KZT</p>
+                    </div>
+                    <div class="currency-card">
+                        <h3>RUB to KZT:</h3>
+                        <p>1 RUB = ${(KZT / RUB).toFixed(2)} KZT</p>
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('currency-container').innerHTML = `<p>Error: ${error.message}</p>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            startCountdown();
+            loadCurrencyRates();
+        });
+    </script>
+
+</body>
+</html>

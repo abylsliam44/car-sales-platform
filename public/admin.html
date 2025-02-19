@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">Admin Panel</h1>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="cars.html">All Cars</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Admin Panel</h1>
+
+    <section>
+        <h2>Manage Cars</h2>
+        <input type="text" id="make" placeholder="Make">
+        <input type="text" id="model" placeholder="Model">
+        <input type="number" id="year" placeholder="Year">
+        <input type="number" id="price" placeholder="Price">
+        <button onclick="addCar()">Add Car</button>
+    </section>
+
+    <section>
+        <h2>All Cars</h2>
+        <div id="car-list"></div>
+    </section>
+
+    <section>
+        <h2>All Orders</h2>
+        <div id="order-list"></div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Car Sales Platform</p>
+        </div>
+    </footer>
+
+    <script src="/admin.js" defer></script>
+
+</body>
+</html>
