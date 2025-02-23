@@ -8,7 +8,7 @@ const register = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "Пользователь уже существует" });
+      return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -21,9 +21,9 @@ const register = async (req, res) => {
     });
 
     await newUser.save();
-    res.status(201).json({ message: "Регистрация успешна" });
+    res.status(201).json({ message: "Registration is successful" });
   } catch (error) {
-    res.status(500).json({ message: "Ошибка при регистрации", error });
+    res.status(500).json({ message: "Register error", error });
   }
 };
 
@@ -32,12 +32,12 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: "Пользователь не найден" });
+      return res.status(400).json({ message: "User is not found" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Неверный пароль" });
+      return res.status(400).json({ message: "Error password" });
     }
 
     const token = jwt.sign(
@@ -48,7 +48,7 @@ const login = async (req, res) => {
 
     res.json({ token, user: { id: user._id, username: user.username, role: user.role } });
   } catch (error) {
-    res.status(500).json({ message: "Ошибка при входе", error });
+    res.status(500).json({ message: "Login error", error });
   }
 };
 
