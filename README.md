@@ -85,9 +85,6 @@ To deploy on platforms like Render or Railway, follow these steps:
 3. Add environment variables in the deployment settings.
 4. Deploy the application.
 
-## License
-This project is licensed under the MIT License.
-
 ## Contact
 For any inquiries, contact [abylajslamzanov@gmail.com].
 
