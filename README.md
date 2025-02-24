@@ -1,6 +1,6 @@
 # Car Sales Platform
 
-## Description
+## What is this website about?
 Car Sales Platform is a web application that allows users to browse, buy, and manage car listings. The platform includes authentication, user roles (admin and client), car listing management, dealer management, and order processing.
 
 ## Features
